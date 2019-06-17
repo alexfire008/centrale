@@ -1,0 +1,25 @@
+Update a film based on the sent information
+---
+tags:
+  - film
+parameters:
+  - name: title
+    in: path
+    type: string
+    description: the title of the film
+  - name: body
+    in: body
+    schema:
+      type: object
+      properties:
+        date:
+          type: integer
+          description: The date of the film
+responses:
+  200:
+    description: The film was successfully created
+    schema:
+      example:
+        film:
+          title : Star Wars A New Hope
+          date : 1979

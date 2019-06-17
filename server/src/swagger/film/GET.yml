@@ -1,0 +1,17 @@
+Return an user key information based on his name
+---
+tags:
+  - film
+parameters:
+  - name: title
+    in: path
+    type: string
+    description: the title of the film
+responses:
+  200:
+    description: The film's information were successfully retrieved
+    schema:
+      example:
+        user:
+          Title: Star Wars A New Hope
+          date: 1979
