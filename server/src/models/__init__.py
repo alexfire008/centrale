@@ -4,3 +4,4 @@ db = SQLAlchemy()
 
 from .user import User
 from .film import Film
+from .notation import Notation
