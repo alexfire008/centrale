@@ -1,0 +1,27 @@
+Return a notation key information based on user's name and movie's title
+---
+tags:
+  - notation
+parameters:
+  - name: user_last_name
+    in: path
+    type: string
+    description: the last name of the user
+  - name: user_first_name
+    in: path
+    type: string
+    description: the last name of the user
+  - name: movie_title
+    in: path
+    type: string
+    description: the title of the film
+responses:
+  200:
+    description: The notation's information were successfully retrieved
+    schema:
+      example:
+        notation:
+          last_name: Doe
+          first_name: John
+          movie : Star Wars A New Hope
+          note : 9

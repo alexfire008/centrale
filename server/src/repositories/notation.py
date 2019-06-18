@@ -24,3 +24,7 @@ class NotationRepository:
         notation = Notation(user_last_name=user_last_name, user_first_name=user_first_name,  movie_title=movie_title, note=note)
 
         return notation.save()
+
+    @staticmethod
+    def average(movie_title):
+        return Notation.query.filter_by(movie_title=movie_title).average()

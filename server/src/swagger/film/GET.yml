@@ -12,6 +12,6 @@ responses:
     description: The film's information were successfully retrieved
     schema:
       example:
-        user:
+        film:
           Title: Star Wars A New Hope
           date: 1977
