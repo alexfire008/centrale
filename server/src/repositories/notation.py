@@ -25,6 +25,3 @@ class NotationRepository:
 
         return notation.save()
 
-    @staticmethod
-    def average(movie_title):
-        return Notation.query.filter_by(movie_title=movie_title).average()

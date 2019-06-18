@@ -44,12 +44,3 @@ class NotationResource(Resource):
         notation = repository.update(user_last_name=user_last_name, user_first_name=user_first_name, movie_title=movie_title, note=note)
         return jsonify({"notation": notation.json})
 
-class NotationAverage(Resource):
-    """ Verbs relative to the notes """
-
-    @staticmethod
-    @swag_from("../swagger/notation/AVERAGE_MOVIE.yml")
-    def average(movie_title):
-        """ Return the average note of a film """
-        notation = NotationRepository.average(movie_title=movie_title)
-        return jsonify({"notation": notation.json})

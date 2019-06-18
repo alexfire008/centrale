@@ -13,5 +13,5 @@ responses:
     schema:
       example:
         film:
-          Title: Star Wars A New Hope
+          title: Star Wars A New Hope
           date: 1977

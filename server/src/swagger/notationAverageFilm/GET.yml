@@ -1,7 +1,7 @@
 Return the average note of a film
 ---
 tags:
-  - notation
+  - average
 parameters:
   - name: movie_title
     in: path
