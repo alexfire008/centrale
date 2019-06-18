@@ -1,6 +1,6 @@
 """ Defines the Film repository """
 
-from models import film
+from models import Film
 
 
 class FilmRepository:
@@ -9,7 +9,7 @@ class FilmRepository:
     @staticmethod
     def get(title):
         """ Query a film by title """
-        return film.query.filter_by(title=title).one()
+        return Film.query.filter_by(title=title).one()
 
     def update(self, title, date):
         """ Update a film's date """
@@ -21,6 +21,6 @@ class FilmRepository:
     @staticmethod
     def create(title, date):
         """ Create a new film """
-        film = film(title=title, date=date)
+        film = Film(title=title, date=date)
 
         return film.save()

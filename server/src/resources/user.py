@@ -13,7 +13,6 @@ from util import parse_params
 
 class UserResource(Resource):
     """ Verbs relative to the users """
-
     @staticmethod
     @swag_from("../swagger/user/GET.yml")
     def get(last_name, first_name):

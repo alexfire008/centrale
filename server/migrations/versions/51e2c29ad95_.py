@@ -23,23 +23,23 @@ def upgrade():
         sa.PrimaryKeyConstraint('first_name', 'last_name')
     )
     op.create_table(
-        'movie',
+        'film',
         sa.Column('title', sa.String(length=300), nullable=False),
         sa.Column('date', sa.Integer(), nullable=True),
         sa.PrimaryKeyConstraint('title')
     )
     op.create_table(
         'notation',
-        sa.Column('movie_title', sa.String(length=300), sa.ForeignKey('movie.title'), nullable=False),
+        sa.Column('movie_title', sa.String(length=300), sa.ForeignKey('film.title'), nullable=False),
         sa.Column('user_first_name', sa.String(length=300), nullable=False),
         sa.Column('user_last_name', sa.String(length=300), nullable=False),
         sa.Column('note', sa.Integer(), nullable=True),
         sa.PrimaryKeyConstraint('movie_title', 'user_first_name', 'user_last_name'),
 		sa.ForeignKeyConstraint(['user_first_name', 'user_last_name'], ['user.first_name', 'user.last_name'])
-	)
+    )
 
 
 def downgrade():
     op.drop_table('notation')
     op.drop_table('user')
-    op.drop_table('movie')
+    op.drop_table('film')
