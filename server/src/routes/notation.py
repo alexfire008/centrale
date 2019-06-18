@@ -4,9 +4,9 @@ Defines the blueprint for the users
 from flask import Blueprint
 from flask_restful import Api
 
-from resources import UserResource
+from resources import NotationResource
 
-USER_BLUEPRINT = Blueprint("user", __name__)
-Api(USER_BLUEPRINT).add_resource(
-    NotationResource, "/user/<string:last_name>/<string:first_name>"
+NOTATION_BLUEPRINT = Blueprint("notation", __name__)
+Api(NOTATION_BLUEPRINT).add_resource(
+    NotationResource, "/notation/<string:user_last_name>/<string:user_first_name>/<string:movie_title>"
 )

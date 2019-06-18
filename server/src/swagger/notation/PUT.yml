@@ -1,13 +1,13 @@
 Update an user based on the sent information
 ---
 tags:
-  - user
+  - notation
 parameters:
-  - name: last_name
+  - name: user_last_name
     in: path
     type: string
     description: the last name of the user
-  - name: first_name
+  - name: user_first_name
     in: path
     type: string
     description: the last name of the user
@@ -16,15 +16,16 @@ parameters:
     schema:
       type: object
       properties:
-        age:
+        note:
           type: integer
-          description: The age of the user
+          description: The note given to the film
 responses:
   200:
     description: The user was successfully created
     schema:
       example:
-        user:
-          last_name: Doe
-          first_name: John
-          age: 30
+        notation:
+          user_last_name: Doe
+          user_first_name: John
+          movie_title: Star Wars A New Hope
+          note: 9

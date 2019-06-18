@@ -7,7 +7,7 @@ from flask.json import jsonify
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
-from repositories import UserRepository
+from repositories import NotationRepository
 from util import parse_params
 
 
@@ -15,31 +15,31 @@ class NotationResource(Resource):
     """ Verbs relative to the notes """
 
     @staticmethod
-    @swag_from("../swagger/user/GET.yml")
-    def get(last_name, first_name):
-        """ Return an user key information based on his name """
-        user = UserRepository.get(last_name=last_name, first_name=first_name)
-        return jsonify({"user": user.json})
+    @swag_from("../swagger/notation/GET.yml")
+    def get(user_last_name, user_first_name,movie_title):
+        """ Return a notation key information based on user's name and title """
+        notation = NotationRepository.get(user_last_name=user_last_name, user_first_name=user_first_name, movie_title=movie_title)
+        return jsonify({"notation": notation.json})
 
     @staticmethod
     @parse_params(
-        Argument("age", location="json", required=True, help="The age of the user.")
+        Argument("note", location="json", required=True, help="The note given to the movie.")
     )
-    @swag_from("../swagger/user/POST.yml")
-    def post(last_name, first_name, age):
-        """ Create an user based on the sent information """
-        user = UserRepository.create(
-            last_name=last_name, first_name=first_name, age=age
+    @swag_from("../swagger/notation/POST.yml")
+    def post(user_last_name, user_first_name, movie_title, note):
+        """ Create a notation based on the sent information """
+        notation = NotationRepository.create(
+            user_last_name=user_last_name, user_first_name=user_first_name, movie_title=movie_title, note=note
         )
-        return jsonify({"user": user.json})
+        return jsonify({"notation": notation.json})
 
     @staticmethod
     @parse_params(
-        Argument("age", location="json", required=True, help="The age of the user.")
+        Argument("note", location="json", required=True, help="The note given to the movie.")
     )
-    @swag_from("../swagger/user/PUT.yml")
-    def put(last_name, first_name, age):
-        """ Update an user based on the sent information """
-        repository = UserRepository()
-        user = repository.update(last_name=last_name, first_name=first_name, age=age)
-        return jsonify({"user": user.json})
+    @swag_from("../swagger/notation/PUT.yml")
+    def put(user_last_name, user_first_name, movie_title, note):
+        """ Update a notation based on the sent information """
+        repository = NotationRepository()
+        notation = repository.update(user_last_name=user_last_name, user_first_name=user_first_name, movie_title=movie_title, note=note)
+        return jsonify({"notation": notation.json})
