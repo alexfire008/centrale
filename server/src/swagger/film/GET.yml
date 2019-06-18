@@ -14,4 +14,4 @@ responses:
       example:
         user:
           Title: Star Wars A New Hope
-          date: 1979
+          date: 1977
