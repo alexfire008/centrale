@@ -1,4 +1,4 @@
-Update an user based on the sent information
+Update a notation based on the sent information
 ---
 tags:
   - notation
@@ -11,6 +11,10 @@ parameters:
     in: path
     type: string
     description: the last name of the user
+  - name: movie_title
+    in: path
+    type: string
+    description: the title of the movie
   - name: body
     in: body
     schema:
@@ -21,7 +25,7 @@ parameters:
           description: The note given to the film
 responses:
   200:
-    description: The user was successfully created
+    description: The notation was successfully created
     schema:
       example:
         notation:

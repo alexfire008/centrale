@@ -11,7 +11,7 @@ parameters:
     in: path
     type: string
     description: the last name of the user
-  -name: movie_title
+  - name: movie_title
     in: path
     type: string
     description: the title of the movie
@@ -25,7 +25,7 @@ parameters:
           description: The note given to the movie
 responses:
   200:
-    description: The user was successfully created
+    description: The notation was successfully created
     schema:
       example:
         notation:
