@@ -14,6 +14,6 @@ class Film(db.Model, BaseModel, metaclass=MetaBaseModel):
     date = db.Column(db.Integer, nullable=True)
 
     def __init__(self, title, date=None):
-        """ Create a new User """
+        """ Create a new film """
         self.title = title
         self.date = date

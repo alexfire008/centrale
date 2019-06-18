@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\models",
+    "\\src\\repositories",
+    "\\src\\resources",
+    "\\src\\swagger",
+    "\\src\\swagger\\user"
+  ],
+  "SelectedNode": "\\src\\models\\user.py",
+  "PreviewInSolutionExplorer": false
+}

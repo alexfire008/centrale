@@ -12,7 +12,7 @@ class FilmRepository:
         return film.query.filter_by(title=title).one()
 
     def update(self, title, date):
-        """ Update a user's age """
+        """ Update a film's date """
         film = self.get(title)
         film.date = date
 
@@ -20,7 +20,7 @@ class FilmRepository:
 
     @staticmethod
     def create(title, date):
-        """ Create a new user """
+        """ Create a new film """
         film = film(title=title, date=date)
 
         return film.save()
