@@ -13,6 +13,8 @@ class Film(db.Model, BaseModel, metaclass=MetaBaseModel):
     title = db.Column(db.String(300), primary_key=True)
     date = db.Column(db.Integer, nullable=True)
 
+    notations = db.relationship("notation", backref="parent")
+
     def __init__(self, title, date=None):
         """ Create a new film """
         self.title = title

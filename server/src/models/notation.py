@@ -10,10 +10,13 @@ class Notation(db.Model, BaseModel, metaclass=MetaBaseModel):
 
     __tablename__ = "notation"
 
-    user_first_name = db.Column(db.String(300), primary_key=True)
-    user_last_name = db.Column(db.String(300), primary_key=True)
-    movie_title = db.Column(db.String(300), primary_key=True)
+    user_first_name = db.Column(db.String(300), db.ForeignKey('user.first_name'), primary_key=True)
+    user_last_name = db.Column(db.String(300), db.ForeignKey('user.last_name'), primary_key=True)
+    movie_title = db.Column(db.String(300), db.ForeignKey('movie.title'), primary_key=True)
     note = db.Column(db.Integer)
+	
+	
+	
 
     def __init__(self, user_first_name, user_last_name, movie_title, note):
         """ Create a new note """
