@@ -17,4 +17,8 @@ class FilmTop5Resource(Resource):
     def get():
         """ Return the average note of a film """
         FilmTop5 = FilmTop5Repository.get()
-        return jsonify({"notation": {"movies": str(FilmTop5)}})
+        FilmTop=[]
+        for i in FilmTop5 :
+            film=(i[0],float(i[1]))
+            FilmTop.append(film)
+        return jsonify({"notation": {"movies": FilmTop}})

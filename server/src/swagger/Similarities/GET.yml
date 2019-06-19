@@ -1,0 +1,23 @@
+Return the similarities with a user
+---
+tags:
+  - similarities
+parameters:
+  - name: user_first_name
+    in: path
+    type: string
+    description: the first name of the user
+  - name: user_last_name
+    in: path
+    type: string
+    description: the last name of the user
+responses:
+  200:
+    description: The more similar users with User have been retrieved.
+    schema:
+      example:
+        notation:
+          user 1: user 1
+          similarity 1: 1
+          user 2: user 2
+          similarity 2: 0.8
