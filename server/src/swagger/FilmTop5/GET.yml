@@ -1,0 +1,20 @@
+Return the 5 films with the best notes
+---
+tags:
+  - top5
+responses:
+  200:
+    description: The 5 best films were successfully retrieved
+    schema:
+      example:
+        notation:
+          movie 1 : film 1
+          average 1: 10
+          movie 2 : film 2
+          average 2: 9
+          movie 3 : film 3
+          average 3: 8
+          movie 4 : film 4
+          average 4: 7
+          movie 5 : film 5
+          average 5: 6
