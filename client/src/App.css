@@ -88,7 +88,8 @@ a {
 .movieApp {
 	display: flex;
 	flex-direction: column;
-=======
+}
+
 .App-logo {
   height: 40vmin;
 }
@@ -102,7 +103,6 @@ a {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
->>>>>>> 299d058f2669e21758e5fb8ef987aea67b752e73
 }
 
 .movieApp .header {

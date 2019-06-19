@@ -46,10 +46,7 @@ function Home() {
 }
 
 function Movie({ match }) {
-	const [movieData, setMovieData] = React.useState(null);
-	React.useEffect(() => {
-		
-	}, []);
+	
 	return (
 		<div className="movieApp">
 			<div className="header">
