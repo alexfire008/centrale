@@ -1,9 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\server",
-    "\\server\\src"
+    "\\client",
+    "\\client\\src",
+    "\\server\\src",
+    "\\server\\src\\models",
+    "\\server\\src\\repositories",
+    "\\server\\src\\resources",
+    "\\server\\src\\swagger",
+    "\\server\\src\\swagger\\film",
+    "\\server\\src\\swagger\\notationAverageFilm"
   ],
-  "SelectedNode": "\\server\\src\\config.py",
+  "SelectedNode": "\\client\\src\\App.js",
   "PreviewInSolutionExplorer": false
 }

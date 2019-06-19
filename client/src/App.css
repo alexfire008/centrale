@@ -1,7 +1,94 @@
-.App {
-  text-align: center;
+body {
+	background-color: #f0f0f0;
 }
 
+a {
+	color: #000;
+	text-decoration: none;
+}
+
+.App {
+	margin: 0;
+	position: absolute;
+
+	top: 50%;
+	left: 50%;
+
+	width: 80%;
+
+	transform: translate(-50%, -50%);
+
+}
+
+.research {
+	padding-bottom: 75px;
+	display: flex;
+	justify: center;
+}
+
+.research input {
+	flex: 1;
+	font-size: 30px;
+	outline: none;
+	border-style: hidden;
+	border-bottom: solid gray 1px;
+	background-color: #0000;
+}
+
+.research input:focus {
+	border-bottom: solid black 1px;
+}
+
+
+.recommendations {
+	display: flex;
+	justify: space-between;
+}
+
+.movies {
+	flex:1;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+<<<<<<< HEAD
+.movie {
+	padding-top: 12px;
+
+	display: flex;
+	flex-direction: line;
+	justify: space-between;
+	
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: gray;
+
+	font-size: 20px;
+}
+
+.movie:hover {
+	background-color: #0000000a;
+	border-bottom-color: black;
+}
+
+.movie:active {
+	background-color: #00000015;
+}
+
+.movieTitle {
+	flex: 10;
+	text-align: left;
+}
+
+.movieNote {
+	flex: 1;
+	text-align: right;
+}
+
+.movieApp {
+	display: flex;
+	flex-direction: column;
+=======
 .App-logo {
   height: 40vmin;
 }
@@ -15,17 +102,49 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+>>>>>>> 299d058f2669e21758e5fb8ef987aea67b752e73
 }
 
-.App-link {
-  color: #61dafb;
+.movieApp .header {
+	display: flex;
+	flex-direction: line;
+	align-items: flex-end;
+	border-bottom: solid gray 1px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.movieApp .title {
+	flex: 1;
+	font-size: 40px;
+	text-align: left;
+}
+
+.movieApp .date {
+	font-size: 12px;
+	text-align: left;
+	vertical-align: bottom;
+}
+
+.movieApp .note {
+	font-size: 40px;
+}
+
+.movieApp .yourNote {
+	display: flex;
+	margin-top: 10%;
+	font-size: 20px;
+}
+
+.movieApp input {
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 40px;
+	font-size: 20px;
+	outline: none;
+	border-style: hidden;
+	border-bottom: solid gray 1px;
+	background-color: #0000;
+}
+
+.movieApp input:focus {
+	border-bottom: solid black 1px;
 }
