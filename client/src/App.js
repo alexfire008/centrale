@@ -101,9 +101,14 @@ function Movie({ match }) {
 					() => {
 							(userNote != null?
 							superagent.put("http://localhost:5000/application/notation/"+user.last_name+"/"+user.first_name+"/"+match.params.title).send({note: newUserNote})
-							:superagent.post("http://localhost:5000/application/notation/"+user.last_name+"/"+user.first_name+"/"+match.params.title).send({note: newUserNote})).then( (response) => window.location.reload());
-
-							}
+							:superagent.post("http://localhost:5000/application/notation/"+user.last_name+"/"+user.first_name+"/"+match.params.title).send({note: newUserNote})).then( (response) => {
+							superagent.get("http://localhost:5000/application/notationAverageFilm/"+match.params.title)
+								.then(response => 
+									setAverageNote((response.body.notation.average+"").substring(0, 3)));
+							})
+								
+	
+					}
 				}> Valider </button>
 			</div>
 		</div>
