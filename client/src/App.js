@@ -5,6 +5,10 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import superagent from 'superagent';
 
 
+const user = {
+	first_name:"a",
+	last_name:"a"
+}
 
 function App() {
 	return (
@@ -61,17 +65,26 @@ function Home() {
 
 function Movie({ match }) {
 	const [movieData, setMovieData] = React.useState("");
-	const [averageNote, setAverageNote] = React.useState("");
 	React.useEffect(() => {
 		superagent.get("http://localhost:5000/application/film/"+match.params.title)
 		.then(response => {
 			setMovieData(response.body.film)
 	})}, []);
+	const [averageNote, setAverageNote] = React.useState("");
 	React.useEffect(() => {
 		superagent.get("http://localhost:5000/application/notationAverageFilm/"+match.params.title)
-		.then(response => {
+		.then(response => 
 			setAverageNote((response.body.notation.average+"").substring(0, 3))
-	})}, []);
+	)}, []);
+	const [userNote, setUserNote] = React.useState(null);
+	const [newUserNote, setNewUserNote] = React.useState("");
+	React.useEffect(() => {
+		superagent.get("http://localhost:5000/application/notation/"+user.last_name+"/"+user.first_name+"/"+match.params.title).then(
+		response => {
+			setUserNote(response.body.notation.note)
+			setNewUserNote(response.body.notation.note | "")
+		}
+	)}, []);
 	
 	
 	return (
@@ -83,8 +96,15 @@ function Movie({ match }) {
 				<div className="date">{movieData.date}</div>
 			<div className="yourNote">
 				<div> votre note : </div>
-				<input className="noteInput" type="number" min="0" max="10"/>
-				<button> Valider </button>
+				<input className="noteInput" value={newUserNote} onChange={(event) => setNewUserNote(event.target.value)} type="number" min="0" max="10"/>
+				<button onClick={
+					() => {
+							(userNote != null?
+							superagent.put("http://localhost:5000/application/notation/"+user.last_name+"/"+user.first_name+"/"+match.params.title).send({note: newUserNote})
+							:superagent.post("http://localhost:5000/application/notation/"+user.last_name+"/"+user.first_name+"/"+match.params.title).send({note: newUserNote})).then( (response) => window.location.reload());
+
+							}
+				}> Valider </button>
 			</div>
 		</div>
 	)
