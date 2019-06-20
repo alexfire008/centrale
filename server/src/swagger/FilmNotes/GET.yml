@@ -1,7 +1,7 @@
 Return the films which have a note given by the user
 ---
 tags:
-  - top5
+  - FilmNotes
 responses:
   200:
     description: The films were retrieved

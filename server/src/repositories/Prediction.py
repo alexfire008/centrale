@@ -46,4 +46,8 @@ class PredictionRepository:
                         norme+=abs(Sim[i][2])
                 avgfilm=float(db.session.query(func.avg(Notation.note)).group_by(Notation.movie_title).filter_by(movie_title=film[0]).all()[0][0])
                 predicateurs.append([prediction,avgfilm,note])
-        return sorted(predicateurs, key=lambda x:x[2],reverse=True)
+        sortpred=sorted(predicateurs, key=lambda x:x[2],reverse=True)
+        L=[]
+        for i in range(5):
+            L.append(sortpred[i])
+        return L
