@@ -44,5 +44,6 @@ class PredictionRepository:
                     if prediction in films2:
                         note+=Sim[i][2]*(filmsnote2[films2.index(prediction)][1]-avg2)
                         norme+=abs(Sim[i][2])
-                predicateurs.append([prediction,note])
-        return sorted(predicateurs, key=lambda x:x[1],reverse=True)
+                avgfilm=float(db.session.query(func.avg(Notation.note)).group_by(Notation.movie_title).filter_by(movie_title=film[0]).all()[0][0])
+                predicateurs.append([prediction,avgfilm,note])
+        return sorted(predicateurs, key=lambda x:x[2],reverse=True)
