@@ -2,7 +2,7 @@ import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import superagent from 'superagent';
 
 
 
@@ -19,6 +19,14 @@ function App() {
 }
 
 function Home() {
+	const [bestMovies, setBestMovies] = React.useState(null)
+	React.useEffect(() => {
+		superagent.get("http://127.0.0.1:5000/application/FilmTop5/")
+		.then(response => {
+			setBestMovies(response.body.notation.movies)
+	})}, []);
+
+
 	return (
 		<div className="Home">
 		{research()}
@@ -26,12 +34,18 @@ function Home() {
 			<div className="recommendations">
 				<div className="movies">
 					<h2 className="title">meilleurs films</h2>
-					{movie("Star Wars 12", 7.5)}
-					{movie("Harry Potter 9", 9.2)}
-					{movie("Star Wars 12", 7.5)}
-					{movie("Harry Potter 9", 9.2)}
-					{movie("Star Wars 12", 7.5)}
+					{bestMovies != null ? (
+						<div>
+						{movie(bestMovies[0][0], bestMovies[0][1])}
+						{movie(bestMovies[1][0], bestMovies[1][1])}
+						{movie(bestMovies[2][0], bestMovies[2][1])}
+						{movie(bestMovies[3][0], bestMovies[3][1])}
+						{movie(bestMovies[4][0], bestMovies[4][1])}
+						</div>
+					):(loading())}
 				</div>
+
+
 				<div className="movies">
 					<h2 className="title">nos recommendations</h2>
 					{movie("Star Wars 12", 7.5)}
@@ -46,14 +60,27 @@ function Home() {
 }
 
 function Movie({ match }) {
+	const [movieData, setMovieData] = React.useState("");
+	const [averageNote, setAverageNote] = React.useState("");
+	React.useEffect(() => {
+		superagent.get("http://localhost:5000/application/film/"+match.params.title)
+		.then(response => {
+			setMovieData(response.body.film)
+	})}, []);
+	React.useEffect(() => {
+		superagent.get("http://localhost:5000/application/notationAverageFilm/"+match.params.title)
+		.then(response => {
+			setAverageNote((response.body.notation.average+"").substring(0, 3))
+	})}, []);
+	
 	
 	return (
 		<div className="movieApp">
 			<div className="header">
-				<div className="title">{match.params.title}</div>
-				<div className="note"> 9.75</div>
+				<div className="title">{movieData.title}</div>
+				<div className="note"> {averageNote}</div>
 			</div>
-				<div className="date">2573</div>
+				<div className="date">{movieData.date}</div>
 			<div className="yourNote">
 				<div> votre note : </div>
 				<input className="noteInput" type="number" min="0" max="10"/>
@@ -76,7 +103,7 @@ function movie(title, avgNote) {
 	return (
 		<Link to={"/movie/"+title} className="movie">
 			<div className="movieTitle"> {title} </div>
-			<div className="movieNote"> {avgNote} </div>
+			<div className="movieNote"> {(avgNote+"").substring(0, 3)} </div>
 		</Link>
 	)
 }
