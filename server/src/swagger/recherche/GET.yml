@@ -1,0 +1,17 @@
+Return films with the research in the title
+---
+tags:
+  - recherche
+parameters:
+  - name: research
+    in: path
+    type: string
+    description: the researched term
+responses:
+  200:
+    description: The films were successfully retrieved
+    schema:
+      example:
+        notation:
+          movie : Star Wars A New Hope
+          average : 8.7

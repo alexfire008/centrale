@@ -5,3 +5,4 @@ from .notationAverageFilm import NotationAverageFilmResource
 from .FilmTop5 import FilmTop5Resource
 from .Prediction import PredictionResource
 from .FilmNotes import FilmNotesResource
+from .recherche import RechercheResource
