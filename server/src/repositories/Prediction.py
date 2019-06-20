@@ -48,6 +48,6 @@ class PredictionRepository:
                 predicateurs.append([prediction,avgfilm,note])
         sortpred=sorted(predicateurs, key=lambda x:x[2],reverse=True)
         L=[]
-        for i in range(max(len(sortpred),5)):
+        for i in range(min(len(sortpred),5)):
             L.append(sortpred[i])
         return L
