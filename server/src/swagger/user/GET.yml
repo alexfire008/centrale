@@ -10,7 +10,7 @@ parameters:
   - name: first_name
     in: path
     type: string
-    description: the last name of the user
+    description: the first name of the user
 responses:
   200:
     description: The user's information were successfully retrieved
