@@ -13,7 +13,7 @@ function App() {
 	
 	const [user, setUser] = React.useState(null);
 
-	const [inscription, setInscription] = React.useState(false);///TODO
+	const [inscription, setInscription] = React.useState(false);
 	
 	return (
 		user == null?
@@ -28,8 +28,8 @@ function App() {
 					{
 						superagent.get("http://localhost:5000/application/user/"+lastName+"/"+firstName).then((response) => setUser(response.body.user))	
 					}
-				}>connexion</button>
-					<button className="inscriptionProposal" onClick={() => setInscription(true)}>inscription</button>
+				}>connect</button>
+					<button className="inscriptionProposal" onClick={() => setInscription(true)}>sign in</button>
 				</div>
 			:<div className="connect">
 				<div className="connectText">first name : </div>
@@ -42,25 +42,48 @@ function App() {
 					{
 						superagent.post("http://localhost:5000/application/user/"+lastName+"/"+firstName).send({age:age}).then((response) => setUser(response.body.user))	
 					}
-				}>inscription</button>
-					<button className="inscriptionProposal" onClick={() => setInscription(false)}>connexion</button>
+				}>sign in</button>
+					<button className="inscriptionProposal" onClick={() => setInscription(false)}>connect</button>
 			</div>
 		:
 		<userContext.Provider value={user}>
 			<Router>
 				<div className="header">
 					<Link to="/" >home</Link>
-					<Link to="/" onClick={() => setUser(null)}> disconnect</Link>
+					<Link to="/" onClick={() => setUser(null)}> sign out</Link>
 					<Link to="/user/"> your profile</Link>
 				</div>
 				<div className="App">
 					<Route exact path="/" component={Home} />
+					<Route path="/user" component={User} />
 					<Route path="/movie/:title" component={Movie} />
 					
 				</div>
 			</Router>
 		</userContext.Provider>
 	);
+}
+
+function User({ match }) {
+	const user = React.useContext(userContext);
+	
+	return (
+		<div className="User">
+			<div className="userData"> 
+				<div className="userField">first name : </div>
+				<div className="userValue"> {user.first_name}  </div>
+			</div>
+			<div className="userData"> 
+				<div className="userField">last name : </div>
+				<div className="userValue"> {user.last_name}  </div>
+			</div>
+			<div className="userData">
+				<div className="userField">age : </div>
+				<div className="userValue"> {user.age} </div>
+			</div>
+		</div>
+	);
+	
 }
 
 function Home() {
@@ -78,7 +101,7 @@ function Home() {
 
 			<div className="recommendations">
 				<div className="movies">
-					<h2 className="title">meilleurs films</h2>
+					<h2 className="title">best movies</h2>
 					{bestMovies != null ? (
 						<div>
 						{movie(bestMovies[0][0], bestMovies[0][1])}
@@ -92,12 +115,16 @@ function Home() {
 
 
 				<div className="movies">
-					<h2 className="title">nos recommendations</h2>
-					{movie("Star Wars 12", 7.5)}
-					{movie("Harry Potter 9", 9.2)}
-					{movie("Star Wars 12", 7.5)}
-					{movie("Harry Potter 9", 9.2)}
-					{movie("Star Wars 12", 7.5)}
+					<h2 className="title">Just for you</h2>
+					{bestMovies != null ? (
+						<div>
+						{movie(bestMovies[0][0], bestMovies[0][1])}
+						{movie(bestMovies[1][0], bestMovies[1][1])}
+						{movie(bestMovies[2][0], bestMovies[2][1])}
+						{movie(bestMovies[3][0], bestMovies[3][1])}
+						{movie(bestMovies[4][0], bestMovies[4][1])}
+						</div>
+					):(loading())}
 				</div>
 			</div>
 		</div>
@@ -126,7 +153,6 @@ function Movie({ match }) {
 			response => {
 				setUserNote(response.body.notation.note)
 				setNewUserNote(response.body.notation.note | "")
-				console.log(user)
 			}
 		)}, []);
 	
@@ -178,7 +204,7 @@ function movie(title, avgNote) {
 
 function loading() {
 	return (
-		<div> chargement en cours</div>
+		<div></div>
 	)
 }
 

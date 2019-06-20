@@ -190,7 +190,28 @@ button:hover {
 	margin-right: 10px;
 }
 
-
 .header a:hover {
 	border-bottom: solid 1px gray;
+}
+
+.User {
+
+}
+
+.User .userData {
+	display : flex;
+	flex-direction: line;
+	justify: space-between;
+	width: 60%;
+	border-bottom: solid gray 1px;
+	font-size: 18px;
+}
+
+.User .userField {
+	flex: 1;
+}
+
+.User .userValue {
+	flex: 1;
+	text-align: right;
 }
