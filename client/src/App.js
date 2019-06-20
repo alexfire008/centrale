@@ -66,7 +66,13 @@ function App() {
 
 function User({ match }) {
 	const user = React.useContext(userContext);
-	const [movies, setMovies] = React.useState([{title:'a', note:7}, {title:'b', note:7}, {title:'c', note:7}, {title:'d', note:7}, {title:'e', note:7}])
+	const [movies, setMovies] = React.useState(null);
+	React.useEffect(() => {
+		superagent.get("http://localhost:5000/application/FilmNotes/" +user.first_name+"/"+user.last_name)
+		.then(response => {
+			console.log(response.body)
+			setMovies(response.body.movies)
+	})}, []);
 	
 	return (
 		<div className="User">
@@ -86,7 +92,9 @@ function User({ match }) {
 			</div>
 			<div className="movies">
 				<h2 className="title">notes</h2>
-				{movies.map((val, index) => movie(val.title, val.note, index))}
+				{
+				movies != null?
+					movies.map((val, index) => movie(val[0], val[1], index)):loading()}
 			</div>
 		</div>
 	);
