@@ -106,7 +106,6 @@ function Home() {
 	React.useEffect(() => {
 		superagent.get("http://localhost:5000/application/prediction/" + user.last_name + "/" + user.first_name)
 		.then(response => {
-			console.log(response.body)
 			setRecommendations(response.body.predictions)
 	})}, []);
 
