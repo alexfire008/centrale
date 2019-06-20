@@ -1,7 +1,7 @@
 Return the similarities with a user
 ---
 tags:
-  - similarities
+  - prediction
 parameters:
   - name: user_first_name
     in: path
