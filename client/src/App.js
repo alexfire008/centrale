@@ -134,7 +134,7 @@ function Home() {
 					<h2 className="title">Just for you</h2>
 					{recommendations != null ? (
 						<div>
-						{recommendations.map((val, index) => movie(val[0], 0, index))}
+						{recommendations.map((val, index) => movie(val[0], val[1], index))}
 						</div>
 					):(loading())}
 				</div>
