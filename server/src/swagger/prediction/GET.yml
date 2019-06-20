@@ -1,4 +1,4 @@
-Return the similarities with a user
+Return the 5 more pertinent films for the chosen user
 ---
 tags:
   - prediction
@@ -17,7 +17,13 @@ responses:
     schema:
       example:
         notation:
-          user 1: user 1
-          similarity 1: 1
-          user 2: user 2
-          similarity 2: 0.8
+          film 1: film 1
+          note 1: 6.5
+          film 2: film 2
+          note 2: 7.4
+          film 3: film 3
+          note 3: 6.3
+          film 4: film 4
+          note 4: 7.1
+          film 5: film 5
+          note 5: 6.1
