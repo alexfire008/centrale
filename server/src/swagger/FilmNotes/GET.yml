@@ -2,6 +2,15 @@ Return the films which have a note given by the user
 ---
 tags:
   - FilmNotes
+parameters:
+  - name: user_last_name
+    in: path
+    type: string
+    description: the last name of the user
+  - name: user_first_name
+    in: path
+    type: string
+    description: the first name of the user
 responses:
   200:
     description: The films were retrieved

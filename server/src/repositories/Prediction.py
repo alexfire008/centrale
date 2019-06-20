@@ -37,7 +37,7 @@ class PredictionRepository:
                 prediction=film
                 note=avg
                 norme=0
-                for i in range(1,2):
+                for i in range(1,max(2,len(Sim)//10)):
                     films2=db.session.query(Notation.movie_title).filter_by(user_first_name=Sim[i][0]).filter_by(user_last_name=Sim[i][1]).all()
                     filmsnote2=db.session.query(Notation.movie_title,Notation.note).filter_by(user_first_name=Sim[i][0]).filter_by(user_last_name=Sim[i][1]).all()
                     avg2=float(db.session.query(func.avg(Notation.note)).group_by(Notation.user_last_name).group_by(Notation.user_first_name).filter_by(user_last_name=Sim[i][1]).all()[0][0])
@@ -48,6 +48,6 @@ class PredictionRepository:
                 predicateurs.append([prediction,avgfilm,note])
         sortpred=sorted(predicateurs, key=lambda x:x[2],reverse=True)
         L=[]
-        for i in range(5):
+        for i in range(max(len(sortpred),5)):
             L.append(sortpred[i])
         return L

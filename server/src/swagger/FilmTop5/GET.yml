@@ -2,6 +2,15 @@ Return the 5 films with the best notes
 ---
 tags:
   - top5
+parameters:
+  - name: user_last_name
+    in: path
+    type: string
+    description: the last name of the user
+  - name: user_first_name
+    in: path
+    type: string
+    description: the last name of the user
 responses:
   200:
     description: The 5 best films were successfully retrieved
