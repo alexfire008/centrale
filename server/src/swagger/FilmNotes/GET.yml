@@ -1,0 +1,15 @@
+Return the films which have a note given by the user
+---
+tags:
+  - top5
+responses:
+  200:
+    description: The films were retrieved
+    schema:
+      example:
+        notation:
+          movie 1 : film 1
+          movie 2 : film 2
+          movie 3 : film 3
+          movie 4 : film 4
+          movie 5 : film 5
