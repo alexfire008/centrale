@@ -94,11 +94,20 @@ function User({ match }) {
 }
 
 function Home() {
+	const user = React.useContext(userContext);
+
 	const [bestMovies, setBestMovies] = React.useState(null)
 	React.useEffect(() => {
 		superagent.get("http://localhost:5000/application/FilmTop5/")
 		.then(response => {
 			setBestMovies(response.body.notation.movies)
+	})}, []);
+	const [recommendations, setRecommendations] = React.useState(null)
+	React.useEffect(() => {
+		superagent.get("http://localhost:5000/application/prediction/" + user.last_name + "/" + user.first_name)
+		.then(response => {
+			console.log(response.body)
+			setRecommendations(response.body.predictions)
 	})}, []);
 
 
@@ -123,13 +132,9 @@ function Home() {
 
 				<div className="movies">
 					<h2 className="title">Just for you</h2>
-					{bestMovies != null ? (
+					{recommendations != null ? (
 						<div>
-						{movie(bestMovies[0][0], bestMovies[0][1], 0)}
-						{movie(bestMovies[1][0], bestMovies[1][1], 1)}
-						{movie(bestMovies[2][0], bestMovies[2][1], 2)}
-						{movie(bestMovies[3][0], bestMovies[3][1], 3)}
-						{movie(bestMovies[4][0], bestMovies[4][1], 4)}
+						{recommendations.map((val, index) => movie(val[0], 0, index))}
 						</div>
 					):(loading())}
 				</div>
