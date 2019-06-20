@@ -1,31 +1,72 @@
 import React from 'react';
-//import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import superagent from 'superagent';
 
 
-const user = {
-	first_name:"a",
-	last_name:"a"
-}
+const userContext = React.createContext(null);
 
 function App() {
-	return (
-	<Router>
-		<div className="App">
-			<Route exact path="/" component={Home} />
-			<Route path="/movie/:title" component={Movie} />
+	const [firstName, setFirstName] = React.useState("");
+	const [lastName, setLastName] = React.useState("");
+	const [age, setAge] = React.useState(0);
+	
+	const [user, setUser] = React.useState(null);
 
-		</div>
-	</Router>
+	const [inscription, setInscription] = React.useState(false);///TODO
+	
+	return (
+		user == null?
+			
+			!inscription?
+				<div className="connect">
+					<div className="connectText">first name : </div>
+					<input className="connectField" type="text" onChange={(event) => setFirstName(event.target.value)}/>
+					<div className="connectText">last name : </div>
+					<input className="connectField" type="text" onChange={(event) => setLastName(event.target.value)}/>
+					<button className="connectButton" onClick={() => 
+					{
+						superagent.get("http://localhost:5000/application/user/"+lastName+"/"+firstName).then((response) => setUser(response.body.user))	
+					}
+				}>connexion</button>
+					<button className="inscriptionProposal" onClick={() => setInscription(true)}>inscription</button>
+				</div>
+			:<div className="connect">
+				<div className="connectText">first name : </div>
+				<input className="connectField" type="text" onChange={(event) => setFirstName(event.target.value)}/>
+				<div className="connectText">last name : </div>
+				<input className="connectField" type="text" onChange={(event) => setLastName(event.target.value)}/>
+				<div className="connectText">age : </div>
+				<input className="connectField" type="number" onChange={(event) => setAge(event.target.value)}/>
+				<button className="connectButton" onClick={() => 
+					{
+						superagent.post("http://localhost:5000/application/user/"+lastName+"/"+firstName).send({age:age}).then((response) => setUser(response.body.user))	
+					}
+				}>inscription</button>
+					<button className="inscriptionProposal" onClick={() => setInscription(false)}>connexion</button>
+			</div>
+		:
+		<userContext.Provider value={user}>
+			<Router>
+				<div className="header">
+					<Link to="/" >home</Link>
+					<Link to="/" onClick={() => setUser(null)}> disconnect</Link>
+					<Link to="/user/"> your profile</Link>
+				</div>
+				<div className="App">
+					<Route exact path="/" component={Home} />
+					<Route path="/movie/:title" component={Movie} />
+					
+				</div>
+			</Router>
+		</userContext.Provider>
 	);
 }
 
 function Home() {
 	const [bestMovies, setBestMovies] = React.useState(null)
 	React.useEffect(() => {
-		superagent.get("http://127.0.0.1:5000/application/FilmTop5/")
+		superagent.get("http://localhost:5000/application/FilmTop5/")
 		.then(response => {
 			setBestMovies(response.body.notation.movies)
 	})}, []);
@@ -64,6 +105,8 @@ function Home() {
 }
 
 function Movie({ match }) {
+	const user = React.useContext(userContext);
+	
 	const [movieData, setMovieData] = React.useState("");
 	React.useEffect(() => {
 		superagent.get("http://localhost:5000/application/film/"+match.params.title)
@@ -80,12 +123,12 @@ function Movie({ match }) {
 	const [newUserNote, setNewUserNote] = React.useState("");
 	React.useEffect(() => {
 		superagent.get("http://localhost:5000/application/notation/"+user.last_name+"/"+user.first_name+"/"+match.params.title).then(
-		response => {
-			setUserNote(response.body.notation.note)
-			setNewUserNote(response.body.notation.note | "")
-		}
-	)}, []);
-	
+			response => {
+				setUserNote(response.body.notation.note)
+				setNewUserNote(response.body.notation.note | "")
+				console.log(user)
+			}
+		)}, []);
 	
 	return (
 		<div className="movieApp">
@@ -94,7 +137,7 @@ function Movie({ match }) {
 				<div className="note"> {averageNote}</div>
 			</div>
 				<div className="date">{movieData.date}</div>
-			<div className="yourNote">
+				<div className="yourNote">
 				<div> votre note : </div>
 				<input className="noteInput" value={newUserNote} onChange={(event) => setNewUserNote(event.target.value)} type="number" min="0" max="10"/>
 				<button onClick={
@@ -112,7 +155,7 @@ function Movie({ match }) {
 				}> Valider </button>
 			</div>
 		</div>
-	)
+	);
 }
 
 function research() {

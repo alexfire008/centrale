@@ -7,6 +7,29 @@ a {
 	text-decoration: none;
 }
 
+input {
+	outline: none;
+	border-style: hidden;
+	border-bottom: solid gray 1px;
+	background-color: #0000;
+}
+
+input:focus {
+	border-bottom: solid black 1px;
+}
+
+button {
+	border: none;
+	background: #0000000a;
+	outline: none;
+	border-bottom: solid 1px gray;
+}
+
+button:hover {
+	border-bottom: solid 1px black;
+	background: #00000015;
+}
+
 .App {
 	margin: 0;
 	position: absolute;
@@ -17,41 +40,31 @@ a {
 	width: 80%;
 
 	transform: translate(-50%, -50%);
-
 }
 
-.research {
+.Home .research {
 	padding-bottom: 75px;
 	display: flex;
 	justify: center;
 }
 
-.research input {
+.Home .research input {
 	flex: 1;
 	font-size: 30px;
-	outline: none;
-	border-style: hidden;
-	border-bottom: solid gray 1px;
-	background-color: #0000;
 }
 
-.research input:focus {
-	border-bottom: solid black 1px;
-}
-
-
-.recommendations {
+.Home .recommendations {
 	display: flex;
 	justify: space-between;
 }
 
-.movies {
+.Home .movies {
 	flex:1;
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
-.movie {
+.Home .movie {
 	padding-top: 12px;
 
 	display: flex;
@@ -65,43 +78,28 @@ a {
 	font-size: 20px;
 }
 
-.movie:hover {
+.Home .movie:hover {
 	background-color: #0000000a;
 	border-bottom-color: black;
 }
 
-.movie:active {
+.Home .movie:active {
 	background-color: #00000015;
 }
 
-.movieTitle {
+.Home .movieTitle {
 	flex: 10;
 	text-align: left;
 }
 
-.movieNote {
+.Home .movieNote {
 	flex: 1;
 	text-align: right;
 }
 
-.movieApp {
+.Home .movieApp {
 	display: flex;
 	flex-direction: column;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #342828;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .movieApp .header {
@@ -138,12 +136,61 @@ a {
 	margin-right: 10px;
 	width: 40px;
 	font-size: 20px;
-	outline: none;
-	border-style: hidden;
-	border-bottom: solid gray 1px;
-	background-color: #0000;
 }
 
-.movieApp input:focus {
-	border-bottom: solid black 1px;
+.connect {
+	margin: 0;
+	position: absolute;
+
+	top: 50%;
+	left: 50%;
+
+	width: 20%;
+	height: 20%;
+
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	justify: center;
+}
+
+.connect .connectText {
+	font-size: 18px;
+}
+
+.connect .connectField {
+	font-size: 24px;
+	margin-bottom: 24px;
+}
+
+.connect .connectButton {
+	font-size: 18px;
+}
+
+.inscriptionProposal {
+	font-size: 12px;
+	color: gray;
+	background: none;
+	border: none;
+	width: 80px;
+	outline: none;
+}
+
+.inscriptionProposal:hover {
+	background: none;
+	border-bottom: solid gray 1px;
+}
+
+.header {
+	font-size: 12px;
+}
+
+.header a {
+	margin-let: 10px;
+	margin-right: 10px;
+}
+
+
+.header a:hover {
+	border-bottom: solid 1px gray;
 }
