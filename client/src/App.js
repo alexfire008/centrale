@@ -6,6 +6,11 @@ import superagent from 'superagent';
 
 const userContext = React.createContext(null);
 
+
+
+
+
+
 function App() {
 	const [firstName, setFirstName] = React.useState("");
 	const [lastName, setLastName] = React.useState("");
@@ -56,6 +61,7 @@ function App() {
 				<div className="App">
 					<Route exact path="/" component={Home} />
 					<Route path="/user" component={User} />
+					<Route path="/search/:search" component={Research} />
 					<Route path="/movie/:title" component={Movie} />
 					
 				</div>
@@ -70,7 +76,6 @@ function User({ match }) {
 	React.useEffect(() => {
 		superagent.get("http://localhost:5000/application/FilmNotes/" +user.first_name+"/"+user.last_name)
 		.then(response => {
-			console.log(response.body)
 			setMovies(response.body.movies)
 	})}, []);
 	
@@ -116,22 +121,22 @@ function Home() {
 		.then(response => {
 			setRecommendations(response.body.predictions)
 	})}, []);
+	const [search, setSearch] = React.useState("");
 
 
 	return (
 		<div className="Home">
-		{research()}
+			<div className="research">
+				<input type="text" onChange={(event) => setSearch(event.target.value)}/>
+				<Link to={"/search/" + search}>search</Link>
+			</div>
 
 			<div className="recommendations">
 				<div className="movies">
 					<h2 className="title">best movies</h2>
 					{bestMovies != null ? (
 						<div>
-						{movie(bestMovies[0][0], bestMovies[0][1], 0)}
-						{movie(bestMovies[1][0], bestMovies[1][1], 1)}
-						{movie(bestMovies[2][0], bestMovies[2][1], 2)}
-						{movie(bestMovies[3][0], bestMovies[3][1], 3)}
-						{movie(bestMovies[4][0], bestMovies[4][1], 4)}
+						{bestMovies.map((val, index) => movie(val[0], val[1], index))}
 						</div>
 					):(loading())}
 				</div>
@@ -203,11 +208,34 @@ function Movie({ match }) {
 	);
 }
 
-function research() {
+function Research({ match }) {
+	const [currentSearch, setCurrentSearch] = React.useState(match.params.search);
+	const [search, setSearch] = React.useState(match.params.search);
+	const [result, setResult] = React.useState(null);
+	React.useEffect(() => {
+		superagent.get("http://localhost:5000/application/recherche/"+currentSearch)
+		.then(response => {
+			setResult(response.body.research)
+	})}, []);
+	
 	return (
-		<div className="research">
-			<input type="text"/>
-			<button>rechercher</button>
+		<div>
+			<div className="research">
+				<input type="text" value={search} onChange={(event) => setSearch(event.target.value)}/>
+				<Link to={"/search/" + search} onClick={() => {
+					superagent.get("http://localhost:5000/application/recherche/"+search)
+					.then(response => {
+						setResult(response.body.research)})
+					setCurrentSearch(search)
+					
+				}}>search</Link>
+			</div>
+			<div className="movies">
+				{
+					result == null?loading():
+					result.map((val, index) => movie(val[0], val[1], index))
+				}
+			</div>
 		</div>
 	)
 }
@@ -223,7 +251,7 @@ function movie(title, avgNote, key=null) {
 
 function loading() {
 	return (
-		<div></div>
+		<div>oouetq</div>
 	)
 }
 

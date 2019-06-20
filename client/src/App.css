@@ -42,13 +42,13 @@ button:hover {
 	transform: translate(-50%, -50%);
 }
 
-.Home .research {
+.research {
 	padding-bottom: 75px;
 	display: flex;
 	justify: center;
 }
 
-.Home .research input {
+.research input {
 	flex: 1;
 	font-size: 30px;
 }
@@ -58,7 +58,7 @@ button:hover {
 	justify: space-between;
 }
 
-.Home .movies {
+.movies {
 	flex:1;
 	padding-left: 10px;
 	padding-right: 10px;
