@@ -66,20 +66,27 @@ function App() {
 
 function User({ match }) {
 	const user = React.useContext(userContext);
+	const [movies, setMovies] = React.useState([{title:'a', note:7}, {title:'b', note:7}, {title:'c', note:7}, {title:'d', note:7}, {title:'e', note:7}])
 	
 	return (
 		<div className="User">
-			<div className="userData"> 
-				<div className="userField">first name : </div>
-				<div className="userValue"> {user.first_name}  </div>
+			<div className="accountData">
+				<div className="userData"> 
+					<div className="userField">first name : </div>
+					<div className="userValue"> {user.first_name}  </div>
+				</div>
+				<div className="userData"> 
+					<div className="userField">last name : </div>
+					<div className="userValue"> {user.last_name}  </div>
+				</div>
+				<div className="userData">
+					<div className="userField">age : </div>
+					<div className="userValue"> {user.age} </div>
+				</div>
 			</div>
-			<div className="userData"> 
-				<div className="userField">last name : </div>
-				<div className="userValue"> {user.last_name}  </div>
-			</div>
-			<div className="userData">
-				<div className="userField">age : </div>
-				<div className="userValue"> {user.age} </div>
+			<div className="movies">
+				<h2 className="title">notes</h2>
+				{movies.map((val, index) => movie(val.title, val.note, index))}
 			</div>
 		</div>
 	);
@@ -104,11 +111,11 @@ function Home() {
 					<h2 className="title">best movies</h2>
 					{bestMovies != null ? (
 						<div>
-						{movie(bestMovies[0][0], bestMovies[0][1])}
-						{movie(bestMovies[1][0], bestMovies[1][1])}
-						{movie(bestMovies[2][0], bestMovies[2][1])}
-						{movie(bestMovies[3][0], bestMovies[3][1])}
-						{movie(bestMovies[4][0], bestMovies[4][1])}
+						{movie(bestMovies[0][0], bestMovies[0][1], 0)}
+						{movie(bestMovies[1][0], bestMovies[1][1], 1)}
+						{movie(bestMovies[2][0], bestMovies[2][1], 2)}
+						{movie(bestMovies[3][0], bestMovies[3][1], 3)}
+						{movie(bestMovies[4][0], bestMovies[4][1], 4)}
 						</div>
 					):(loading())}
 				</div>
@@ -118,11 +125,11 @@ function Home() {
 					<h2 className="title">Just for you</h2>
 					{bestMovies != null ? (
 						<div>
-						{movie(bestMovies[0][0], bestMovies[0][1])}
-						{movie(bestMovies[1][0], bestMovies[1][1])}
-						{movie(bestMovies[2][0], bestMovies[2][1])}
-						{movie(bestMovies[3][0], bestMovies[3][1])}
-						{movie(bestMovies[4][0], bestMovies[4][1])}
+						{movie(bestMovies[0][0], bestMovies[0][1], 0)}
+						{movie(bestMovies[1][0], bestMovies[1][1], 1)}
+						{movie(bestMovies[2][0], bestMovies[2][1], 2)}
+						{movie(bestMovies[3][0], bestMovies[3][1], 3)}
+						{movie(bestMovies[4][0], bestMovies[4][1], 4)}
 						</div>
 					):(loading())}
 				</div>
@@ -193,9 +200,9 @@ function research() {
 	)
 }
 
-function movie(title, avgNote) {
+function movie(title, avgNote, key=null) {
 	return (
-		<Link to={"/movie/"+title} className="movie">
+		<Link to={"/movie/"+title} className="movie" key={key}>
 			<div className="movieTitle"> {title} </div>
 			<div className="movieNote"> {(avgNote+"").substring(0, 3)} </div>
 		</Link>

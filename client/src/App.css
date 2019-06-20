@@ -64,7 +64,7 @@ button:hover {
 	padding-right: 10px;
 }
 
-.Home .movie {
+.movie {
 	padding-top: 12px;
 
 	display: flex;
@@ -78,21 +78,21 @@ button:hover {
 	font-size: 20px;
 }
 
-.Home .movie:hover {
+.movie:hover {
 	background-color: #0000000a;
 	border-bottom-color: black;
 }
 
-.Home .movie:active {
+.movie:active {
 	background-color: #00000015;
 }
 
-.Home .movieTitle {
+.movieTitle {
 	flex: 10;
 	text-align: left;
 }
 
-.Home .movieNote {
+.movieNote {
 	flex: 1;
 	text-align: right;
 }
@@ -109,7 +109,7 @@ button:hover {
 	border-bottom: solid gray 1px;
 }
 
-.movieApp .title {
+.title {
 	flex: 1;
 	font-size: 40px;
 	text-align: left;
@@ -214,4 +214,8 @@ button:hover {
 .User .userValue {
 	flex: 1;
 	text-align: right;
+}
+
+.User .accountData {
+	margin-bottom: 50px;
 }
